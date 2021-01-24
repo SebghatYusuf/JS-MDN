@@ -7,7 +7,7 @@
     <title>Audio</title>
 </head>
 
-<body>
+<body style="text-align: center;">
     <h1>Audio Test</h1>
     <audio src="./01- Client Side Web APIs/Jugrafiyaa.mp3"></audio>
     <button class="paused">Play</button>
@@ -15,21 +15,40 @@
     <input type="range" min="0" max="1" step="0.01" value="1" class="volume">
 
     <script>
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const AudioContext = window.AudioContext;
 
         const audioCtx = new AudioContext();
-        const audioElement = document.querySelector('audio')
-        const playButton = document.querySelector('button')
+        const audioElement = document.querySelector('audio');
+        const playBtn = document.querySelector('button');
         const volumeSlider = document.querySelector('.volume');
-        const audioSource = audioCtx.createMediaElementSource(audioElement)
 
-        playButton.addEventListener('click', ()=>{
-            if (audioCtx.state === 'suspended'){
+        const audioSource = audioCtx.createMediaElementSource(audioElement);
+        console.log(audioElement)
+        // play/pause audio
+        playBtn.addEventListener('click', function () {
+            // check if context is in suspended state (autoplay policy)
+            if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
             }
-            // if track is stopped, play it.
-        })
 
+            // if track is stopped, play it
+            if (this.getAttribute('class') === 'paused') {
+                audioElement.play();
+                this.setAttribute('class', 'playing');
+                this.textContent = 'Pause'
+                // if track is playing, stop it
+            } else if (this.getAttribute('class') === 'playing') {
+                audioElement.pause();
+                this.setAttribute('class', 'paused');
+                this.textContent = 'Play';
+            }
+        });
+
+        // if track ends
+        audioElement.addEventListener('ended', function () {
+            playBtn.setAttribute('class', 'paused');
+            playBtn.textContent = 'Play';
+        });
     </script>
 
 
