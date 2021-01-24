@@ -8,6 +8,5 @@ are built into your web browser and are able to expose data from the browser and
 Third-party APIs <br/>
 are not built into the browser by default, and you generally have to retrieve their code and information from somewhere on the Web. For example, the [Twitter API](https://dev.twitter.com/overview/documentation) allows you to do things like displaying your latest tweets on your website. It provides a special set of constructs you can use to query the Twitter service and return specific information.
 
-
-<img src="./browser.png">
+<img src="./browser.png" alt="THIRD PARTY API">
 
